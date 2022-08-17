@@ -1,7 +1,7 @@
-function FilterButton() {
+function FilterButton({ text }) {
     return (<button type="button" className="btn toggle-btn" aria-pressed="true">
         <span className="visually-hidden">Show </span>
-        <span>all </span>
+        <span>{text} </span>
         <span className="visually-hidden">tasks</span>
     </button>);
 }
