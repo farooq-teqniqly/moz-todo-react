@@ -1,6 +1,10 @@
 import Todo from "./components/Todo";
 
-function App() {
+function App({ tasks }) {
+  const taskList = tasks.map((task) => (
+    <Todo id={task.id} name={task.name} completed={task.completed} key={task.id}></Todo>
+  ));
+
   return (
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>
@@ -30,9 +34,7 @@ function App() {
       </div>
       <h2 id="list-heading">3 tasks remaining</h2>
       <ul className="todo-list stack-large stack-exception" aria-labelledby="list-heading">
-        <Todo id="todo-0" name="Eat" completed={true}></Todo>
-        <Todo id="todo-1" name="Sleep"></Todo>
-        <Todo id="todo-2" name="Repeat"></Todo>
+        {taskList}
         {/* <li className="todo stack-small">
           <div className="c-cb">
             <input id="todo-0" type="checkbox" defaultChecked={true} />
