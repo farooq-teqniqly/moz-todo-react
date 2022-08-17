@@ -17,4 +17,8 @@ function Todo({ name, completed }) {
     );
 }
 
+Todo.defaultProps = {
+    completed: false
+}
+
 export default Todo;
