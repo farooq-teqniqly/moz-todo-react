@@ -1,9 +1,9 @@
-function Todo({ name, completed }) {
+function Todo({ id, name, completed }) {
     return (
         <li className="todo stack-small">
             <div className="c-cb">
-                <input id="todo-0" type="checkbox" defaultChecked={completed} />
-                <label className="todo-label" htmlFor="todo-0">{name}</label>
+                <input id={id} type="checkbox" defaultChecked={completed} />
+                <label className="todo-label" htmlFor={id}>{name}</label>
             </div>
             <div className="btn-group">
                 <button type="button" className="btn">

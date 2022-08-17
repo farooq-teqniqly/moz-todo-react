@@ -30,9 +30,9 @@ function App() {
       </div>
       <h2 id="list-heading">3 tasks remaining</h2>
       <ul className="todo-list stack-large stack-exception" aria-labelledby="list-heading">
-        <Todo name="Eat" completed={true}></Todo>
-        <Todo name="Sleep"></Todo>
-        <Todo name="Repeat"></Todo>
+        <Todo id="todo-0" name="Eat" completed={true}></Todo>
+        <Todo id="todo-1" name="Sleep"></Todo>
+        <Todo id="todo-2" name="Repeat"></Todo>
         {/* <li className="todo stack-small">
           <div className="c-cb">
             <input id="todo-0" type="checkbox" defaultChecked={true} />
