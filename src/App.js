@@ -8,12 +8,29 @@ function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
 
   const taskList = tasks.map(({ id, name, completed }) => (
-    <Todo id={id} name={name} completed={completed} key={id}></Todo>
+    <Todo id={id} name={name} completed={completed} key={id} toggleTaskCompleted={toggleTaskCompleted} deleteTask={deleteTask}></Todo>
   ));
 
   function addTask(name) {
     const newTask = { id: `todo-${nanoid()}`, name: name, completed: false };
     setTasks([...tasks, newTask]);
+  }
+
+  function toggleTaskCompleted(id) {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id !== id) {
+        return task;
+      }
+
+      return { ...task, completed: !task.completed };
+    });
+
+    setTasks(updatedTasks);
+  }
+
+  function deleteTask(id) {
+    const remainingTasks = tasks.filter((task) => task.id !== id);
+    setTasks(remainingTasks);
   }
 
   const taskNoun = tasks.length === 1 ? "task" : "tasks";
