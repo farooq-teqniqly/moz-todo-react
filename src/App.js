@@ -4,12 +4,27 @@ import Todo from "./components/Todo";
 import Form from "./components/Form";
 import FilterButton from "./components/FilterButton";
 
+const FILTER_MAP = {
+  All: () => true,
+  Active: (task) => !task.completed,
+  Completed: (task) => task.completed
+};
+
+const FILTER_NAMES = Object.keys(FILTER_MAP);
+
 function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
+  const [filter, setFilter] = useState("All");
 
-  const taskList = tasks.map(({ id, name, completed }) => (
-    <Todo id={id} name={name} completed={completed} key={id} toggleTaskCompleted={toggleTaskCompleted} deleteTask={deleteTask} editTask={editTask}></Todo>
-  ));
+  const taskList = tasks
+    .filter(FILTER_MAP[filter])
+    .map(({ id, name, completed }) => (
+      <Todo id={id} name={name} completed={completed} key={id} toggleTaskCompleted={toggleTaskCompleted} deleteTask={deleteTask} editTask={editTask}></Todo>
+    ));
+
+  const filterList = FILTER_NAMES.map((name) => (
+    <FilterButton key={name} text={name} isPressed={name === filter} setFilter={setFilter}></FilterButton>
+  ))
 
   function addTask(name) {
     const newTask = { id: `todo-${nanoid()}`, name: name, completed: false };
@@ -53,9 +68,7 @@ function App(props) {
       <h1>TodoMatic</h1>
       <Form addTask={addTask}></Form>
       <div className="filters btn-group stack-exception">
-        <FilterButton text="all"></FilterButton>
-        <FilterButton text="incomplete"></FilterButton>
-        <FilterButton text="completed"></FilterButton>
+        {filterList}
       </div>
       <h2 id="list-heading">{headingText}</h2>
       <ul className="todo-list stack-large stack-exception" aria-labelledby="list-heading">
