@@ -8,7 +8,7 @@ function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
 
   const taskList = tasks.map(({ id, name, completed }) => (
-    <Todo id={id} name={name} completed={completed} key={id} toggleTaskCompleted={toggleTaskCompleted} deleteTask={deleteTask}></Todo>
+    <Todo id={id} name={name} completed={completed} key={id} toggleTaskCompleted={toggleTaskCompleted} deleteTask={deleteTask} editTask={editTask}></Todo>
   ));
 
   function addTask(name) {
@@ -31,6 +31,18 @@ function App(props) {
   function deleteTask(id) {
     const remainingTasks = tasks.filter((task) => task.id !== id);
     setTasks(remainingTasks);
+  }
+
+  function editTask(id, newName) {
+    const editedTasks = tasks.map((task) => {
+      if (id !== task.id) {
+        return task;
+      }
+
+      return { ...task, name: newName };
+    });
+
+    setTasks(editedTasks);
   }
 
   const taskNoun = tasks.length === 1 ? "task" : "tasks";
